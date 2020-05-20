@@ -1,6 +1,7 @@
 package com.optimus.devcolibrifinal.remote
 
 import com.optimus.devcolibrifinal.model.Book
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 
@@ -9,5 +10,5 @@ import retrofit2.http.GET
  */
 interface BookRemoteService {
     @GET("0f14812045073a3052d4")
-    fun loadBooks():Single<List<Book>>
+    fun loadBooks(): Single<List<Book>>
 }
