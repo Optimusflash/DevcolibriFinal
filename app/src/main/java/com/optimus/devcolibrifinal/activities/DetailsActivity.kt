@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.optimus.devcolibrifinal.R
-import com.optimus.devcolibrifinal.di.App
+import com.optimus.devcolibrifinal.di.Injector
 import com.optimus.devcolibrifinal.model.Book
 import com.optimus.devcolibrifinal.viewmodels.DetailViewModel
 import kotlinx.android.synthetic.main.activity_details.*
@@ -23,7 +23,7 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        App.getBookDetailComponent().inject(this)
+        Injector.getBookDetailComponent().inject(this)
 
         initViewModel()
         handleIntent()
@@ -52,6 +52,6 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        App.destroyBookDetailComponent()
+        Injector.destroyBookDetailComponent()
     }
 }

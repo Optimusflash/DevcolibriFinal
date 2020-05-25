@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.optimus.devcolibrifinal.R
 import com.optimus.devcolibrifinal.adapters.BookAdapter
 import com.optimus.devcolibrifinal.di.App
+import com.optimus.devcolibrifinal.di.Injector
 import com.optimus.devcolibrifinal.viewmodels.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        App.getBookListComponent().inject(this)
+        Injector.getBookListComponent().inject(this)
 
         initViewModel()
         initViews()
@@ -51,6 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        App.destroyBookListComponent()
+        Injector.destroyBookListComponent()
     }
 }
