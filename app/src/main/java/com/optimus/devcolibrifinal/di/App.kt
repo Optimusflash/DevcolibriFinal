@@ -14,33 +14,6 @@ import com.optimus.devcolibrifinal.di.modules.StorageModule
  */
 class App: Application() {
 
-    companion object{
-        lateinit var appComponent: AppComponent
-        private var bookListComponent: BookListComponent? = null
-        private var bookDetailComponent: BookDetailComponent? = null
-
-        fun getBookListComponent() : BookListComponent {
-            if (bookListComponent==null) {
-                bookListComponent = appComponent.addBookListComponent()
-            }
-            return bookListComponent as BookListComponent
-        }
-        fun destroyBookListComponent(){
-            bookListComponent = null
-        }
-
-        fun getBookDetailComponent(): BookDetailComponent{
-            if (bookDetailComponent==null) {
-                bookDetailComponent = appComponent.addBookDetailComponent()
-            }
-            return bookDetailComponent as BookDetailComponent
-        }
-
-        fun destroyBookDetailComponent(){
-            bookDetailComponent = null
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
@@ -48,10 +21,7 @@ class App: Application() {
     }
 
     private fun initAppComponent() {
-        appComponent = DaggerAppComponent.builder()
-            .remoteModule(RemoteModule())
-            .storageModule(StorageModule(this))
-            .build()
+        Injector.init(this)
     }
 
 
