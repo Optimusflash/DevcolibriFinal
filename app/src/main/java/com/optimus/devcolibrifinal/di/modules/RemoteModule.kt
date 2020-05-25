@@ -1,4 +1,4 @@
-package com.optimus.devcolibrifinal.di
+package com.optimus.devcolibrifinal.di.modules
 
 import com.optimus.devcolibrifinal.remote.BookRemoteService
 import dagger.Module

@@ -1,8 +1,7 @@
-package com.optimus.devcolibrifinal.di
+package com.optimus.devcolibrifinal.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.optimus.devcolibrifinal.storage.BookDao
 import com.optimus.devcolibrifinal.storage.BookDatabase
 import dagger.Module

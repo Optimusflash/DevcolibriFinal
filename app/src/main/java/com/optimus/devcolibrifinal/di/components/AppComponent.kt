@@ -1,5 +1,7 @@
-package com.optimus.devcolibrifinal.di
+package com.optimus.devcolibrifinal.di.components
 
+import com.optimus.devcolibrifinal.di.modules.RemoteModule
+import com.optimus.devcolibrifinal.di.modules.StorageModule
 import com.optimus.devcolibrifinal.remote.BookRemoteService
 import com.optimus.devcolibrifinal.repositories.BookRepository
 import com.optimus.devcolibrifinal.storage.BookDao
@@ -19,4 +21,8 @@ interface AppComponent {
     fun bookService(): BookRemoteService
     fun bookDao(): BookDao
     fun bookRepository(): BookRepository
+
+    fun addBookListComponent(): BookListComponent
+    fun addBookDetailComponent(): BookDetailComponent
+
 }

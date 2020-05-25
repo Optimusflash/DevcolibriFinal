@@ -1,4 +1,4 @@
-package com.optimus.devcolibrifinal.di
+package com.optimus.devcolibrifinal.di.scopes
 
 import javax.inject.Scope
 

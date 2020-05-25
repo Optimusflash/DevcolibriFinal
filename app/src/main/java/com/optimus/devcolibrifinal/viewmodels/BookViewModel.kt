@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.optimus.devcolibrifinal.di.ActivityScope
+import com.optimus.devcolibrifinal.di.scopes.ActivityScope
 import com.optimus.devcolibrifinal.model.Book
 import com.optimus.devcolibrifinal.repositories.BookRepository
 import io.reactivex.Completable
@@ -12,7 +12,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by Dmitriy Chebotar on 20.04.2020.
