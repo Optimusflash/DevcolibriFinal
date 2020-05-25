@@ -3,25 +3,25 @@ package com.optimus.devcolibrifinal.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.optimus.devcolibrifinal.R
 import com.optimus.devcolibrifinal.adapters.BookAdapter
-import com.optimus.devcolibrifinal.adapters.ItemTouchCallback
+import com.optimus.devcolibrifinal.di.App
 import com.optimus.devcolibrifinal.viewmodels.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-
+import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bookViewModel: BookViewModel
+    @Inject
+    lateinit var bookViewModel: BookViewModel
     private lateinit var adapter:BookAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        App.bookListComponent.inject(this)
 
         initViewModel()
         initViews()
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        bookViewModel = ViewModelProviders.of(this).get(BookViewModel::class.java)
+       // bookViewModel = ViewModelProviders.of(this).get(BookViewModel::class.java)
         bookViewModel.loadBooksData()
         bookViewModel.getBooks().observe(this, Observer {
             Log.e("M_MainActivity", "$it")

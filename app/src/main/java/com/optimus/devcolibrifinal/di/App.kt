@@ -9,20 +9,35 @@ import com.facebook.stetho.Stetho
 class App: Application() {
 
     companion object{
-        lateinit var component: AppComponent
+        lateinit var appComponent: AppComponent
+        lateinit var bookListComponent: BookListComponent
+        lateinit var bookDetailComponent: BookDetailComponent
     }
 
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
-        initComponent()
-
+        initAppComponent()
+        initBookListComponent()
+        initBookDetailComponent()
     }
 
-    private fun initComponent() {
-        component = DaggerAppComponent.builder()
+    private fun initAppComponent() {
+        appComponent = DaggerAppComponent.builder()
             .remoteModule(RemoteModule())
             .storageModule(StorageModule(this))
+            .build()
+    }
+
+    private fun initBookListComponent() {
+        bookListComponent = DaggerBookListComponent.builder()
+            .appComponent(appComponent)
+            .build()
+    }
+
+    private fun initBookDetailComponent(){
+        bookDetailComponent = DaggerBookDetailComponent.builder()
+            .appComponent(appComponent)
             .build()
     }
 }
