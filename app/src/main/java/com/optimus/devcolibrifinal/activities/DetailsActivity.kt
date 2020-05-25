@@ -23,7 +23,7 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        App.bookDetailComponent.inject(this)
+        App.getBookDetailComponent().inject(this)
 
         initViewModel()
         handleIntent()
@@ -48,5 +48,10 @@ class DetailsActivity : AppCompatActivity() {
     private fun handleIntent() {
         val id = intent.getIntExtra(EXTRA_ID,-1)
         detailViewModel.findBookById(id)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.destroyBookDetailComponent()
     }
 }

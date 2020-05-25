@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        App.bookListComponent.inject(this)
+        App.getBookListComponent().inject(this)
 
         initViewModel()
         initViews()
@@ -47,5 +47,10 @@ class MainActivity : AppCompatActivity() {
             Log.e("M_MainActivity", "$it")
             adapter.updateData(it)
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.destroyBookListComponent()
     }
 }

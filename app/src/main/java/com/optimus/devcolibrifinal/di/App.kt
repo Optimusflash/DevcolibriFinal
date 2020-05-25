@@ -16,16 +16,35 @@ class App: Application() {
 
     companion object{
         lateinit var appComponent: AppComponent
-        lateinit var bookListComponent: BookListComponent
-        lateinit var bookDetailComponent: BookDetailComponent
+        private var bookListComponent: BookListComponent? = null
+        private var bookDetailComponent: BookDetailComponent? = null
+
+        fun getBookListComponent() : BookListComponent {
+            if (bookListComponent==null) {
+                bookListComponent = appComponent.addBookListComponent()
+            }
+            return bookListComponent as BookListComponent
+        }
+        fun destroyBookListComponent(){
+            bookListComponent = null
+        }
+
+        fun getBookDetailComponent(): BookDetailComponent{
+            if (bookDetailComponent==null) {
+                bookDetailComponent = appComponent.addBookDetailComponent()
+            }
+            return bookDetailComponent as BookDetailComponent
+        }
+
+        fun destroyBookDetailComponent(){
+            bookDetailComponent = null
+        }
     }
 
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
         initAppComponent()
-        initBookListComponent()
-        initBookDetailComponent()
     }
 
     private fun initAppComponent() {
@@ -35,15 +54,6 @@ class App: Application() {
             .build()
     }
 
-    private fun initBookListComponent() {
-         bookListComponent = appComponent.addBookListComponent()
 
-    }
 
-    private fun initBookDetailComponent(){
-//        bookDetailComponent = DaggerBookDetailComponent.builder()
-//            .appComponent(appComponent)
-//            .build()
-        bookDetailComponent = appComponent.addBookDetailComponent()
-    }
 }
