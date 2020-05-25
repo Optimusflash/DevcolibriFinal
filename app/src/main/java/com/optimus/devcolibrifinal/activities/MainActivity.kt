@@ -5,24 +5,28 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.optimus.devcolibrifinal.R
 import com.optimus.devcolibrifinal.adapters.BookAdapter
 import com.optimus.devcolibrifinal.di.App
 import com.optimus.devcolibrifinal.di.Injector
 import com.optimus.devcolibrifinal.viewmodels.BookViewModel
+import com.optimus.devcolibrifinal.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var bookViewModel: BookViewModel
     private lateinit var adapter:BookAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Injector.getBookListComponent().inject(this)
+        Injector.getAppComponent().inject(this)
 
         initViewModel()
         initViews()
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-       // bookViewModel = ViewModelProviders.of(this).get(BookViewModel::class.java)
+        bookViewModel = ViewModelProviders.of(this, viewModelFactory).get(BookViewModel::class.java)
         bookViewModel.loadBooksData()
         bookViewModel.getBooks().observe(this, Observer {
             Log.e("M_MainActivity", "$it")
@@ -50,8 +54,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Injector.destroyBookListComponent()
-    }
 }

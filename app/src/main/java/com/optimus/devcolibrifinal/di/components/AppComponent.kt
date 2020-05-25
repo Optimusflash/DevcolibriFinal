@@ -1,10 +1,10 @@
 package com.optimus.devcolibrifinal.di.components
 
+import com.optimus.devcolibrifinal.activities.DetailsActivity
+import com.optimus.devcolibrifinal.activities.MainActivity
 import com.optimus.devcolibrifinal.di.modules.RemoteModule
 import com.optimus.devcolibrifinal.di.modules.StorageModule
-import com.optimus.devcolibrifinal.remote.BookRemoteService
-import com.optimus.devcolibrifinal.repositories.BookRepository
-import com.optimus.devcolibrifinal.storage.BookDao
+import com.optimus.devcolibrifinal.di.modules.ViewModelModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -13,16 +13,9 @@ import javax.inject.Singleton
  * Created by Dmitriy Chebotar on 19.04.2020.
  */
 @Singleton
-@Component(modules = [RemoteModule::class, StorageModule::class])
+@Component(modules = [RemoteModule::class, StorageModule::class, ViewModelModule::class])
 interface AppComponent {
-//    fun inject (repository: BookRepository)
-//    fun inject (bookViewModel: BookViewModel)
-//    fun inject (detailViewModel: DetailViewModel)
-    fun bookService(): BookRemoteService
-    fun bookDao(): BookDao
-    fun bookRepository(): BookRepository
 
-    fun addBookListComponent(): BookListComponent
-    fun addBookDetailComponent(): BookDetailComponent
-
+    fun inject(mainActivity: MainActivity)
+    fun inject(detailsActivity: DetailsActivity)
 }
